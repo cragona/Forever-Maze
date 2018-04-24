@@ -1,3 +1,4 @@
 build/default/production/Joystick.o:  \
 Joystick.c  \
-lcdlib.h 
+lcdlib.h  \
+ws2812lib.h 

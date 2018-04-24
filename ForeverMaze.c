@@ -119,34 +119,42 @@ void checkPlayer(int direction)
     
     switch(direction)
     {
-        case 3://left
-            if(playerCol == 0)//out of bounds move
-                break;
-            else if(maze[playerRow][playerCol - 1] == 1)//wall
-                break;
-            else
-                playerCol -= 1; //move left
-        case 2://up
-            if(playerRow == 0)//out of bounds move
-                break;
-            else if(maze[playerRow - 1][playerCol] == 1)//wall
-                break;
-            else
-                playerRow -=1; //move up
         case 1://right
             if(playerCol == 7)//out of bounds
                 break;
             else if(maze[playerRow][playerCol + 1] == 1) //wall
                 break;
             else
-                playerCol += 1; //move right
+                playerCol++; //move right
+            break;
+            
+        case 2://up
+        if(playerRow == 0)//out of bounds move
+            break;
+        else if(maze[playerRow - 1][playerCol] == 1)//wall
+            break;
+        else
+            playerRow--; //move up
+        break;
+        
+        case 3://left
+            if(playerCol == 0)//out of bounds move
+                break;
+            else if(maze[playerRow][playerCol - 1] == 1)//wall
+                break;
+            else
+                playerCol--; //move left
+            break;
+            
         case 4://down
             if(playerRow == 7)
                 break;
             else if(maze[playerRow + 1][playerCol] == 1)
                 break;
             else
-                playerRow += 1;
+                playerRow++;
+            break;
+            
         default: //5 - center
             break;
     }
@@ -156,7 +164,6 @@ void updateMaze(int direction)
     checkPlayer(direction);
     maze[playerPrevRow][playerPrevCol] = 0;
     maze[playerRow][playerCol] = 8;
-      
 }
 
 
@@ -164,9 +171,8 @@ int main(void) {
     setup();
     
     mazeSetup();
-    
-    
-    int playerDirection;
+     
+    static int playerDirection;
     
     playerRow = 0; //start row
     playerCol = 0; //start col

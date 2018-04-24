@@ -1,7 +1,7 @@
 #include <p24Fxxxx.h>
 #include "xc.h"
 #include "lcdlib.h"
-
+#include "ws2812lib.h"
 
 
 //x will be an0, assign ADC1BUF 0
@@ -10,7 +10,7 @@ volatile int xBuf, yBuf;
 
 void __attribute__((__interrupt__,__auto_psv__)) _ADC1Interrupt(void)
 {
-        _AD1IF = 0;
+    _AD1IF = 0;
     
     static int count;
     
@@ -34,11 +34,10 @@ int getJoystickDirection(void)
     AD1CON1bits.ASAM = 1; //start sample
     while(!IFS0bits.AD1IF){}; //wait until conversion time
     AD1CON1bits.ASAM = 0; //shut off sampling to start conversion
-
     
-    if(xBuf > 520) //x-left
+    if(xBuf > 500) //x-left
         direction = 1;
-    else if(xBuf < 500) //x-right
+    else if(xBuf < 400) //x-right
         direction = 3;
     else if(yBuf > 550) //y-down
         direction = 4;
@@ -46,6 +45,9 @@ int getJoystickDirection(void)
         direction = 2;
     else 
         direction = 5;
+    
+    xBuf = 500;
+    yBuf = 500;
     
     return direction;
 }

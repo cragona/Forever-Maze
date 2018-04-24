@@ -67,10 +67,10 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x11e           0x1ad  (429)
 .const                       0x31e                0x22            0x33  (51)
-.text                        0x340               0x784           0xb46  (2886)
-.dinit                       0xac4                0x14            0x1e  (30)
+.text                        0x340               0x794           0xb5e  (2910)
+.dinit                       0xad4                0x14            0x1e  (30)
 
-                 Total program memory used (bytes):          0xd44  (3396) 5%
+                 Total program memory used (bytes):          0xd5c  (3420) 5%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0xfc]
@@ -84,10 +84,10 @@ Data Memory  [Origin = 0x800, Length = 0x2000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0             0xe  (14)
-.bss                         0x80e                   0            0x80  (128)
+.nbss                        0x800                   0            0x10  (16)
+.bss                         0x810                   0            0x80  (128)
 
-                 Total data memory used (bytes):           0x8e  (142) 1%
+                 Total data memory used (bytes):           0x90  (144) 1%
 
 
 Dynamic Memory Usage
@@ -95,9 +95,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x88e                              0x1f72  (8050)
+stack                        0x890                              0x1f70  (8048)
 
-                 Maximum dynamic memory (bytes):         0x1f72  (8050)
+                 Maximum dynamic memory (bytes):         0x1f70  (8048)
 
 
 External Symbols in Data Memory (by address):
@@ -106,19 +106,19 @@ External Symbols in Data Memory (by address):
                     0x0802                  _playerPrevCol
                     0x0804                  _playerRow
                     0x0806                  _playerCol
-                    0x0808                  _xBuf
-                    0x080a                  _yBuf
-                    0x080e                  _maze
+                    0x080a                  _xBuf
+                    0x080c                  _yBuf
+                    0x0810                  _maze
 
 External Symbols in Data Memory (by name):
 
-                    0x080e                  _maze
+                    0x0810                  _maze
                     0x0806                  _playerCol
                     0x0802                  _playerPrevCol
                     0x0800                  _playerPrevRow
                     0x0804                  _playerRow
-                    0x0808                  _xBuf
-                    0x080a                  _yBuf
+                    0x080a                  _xBuf
+                    0x080c                  _yBuf
 
 External Symbols in Program Memory (by address):
 
@@ -133,27 +133,27 @@ External Symbols in Program Memory (by address):
                   0x000358                  _mazeSetup
                   0x000432                  _writeMaze
                   0x0004a0                  _checkPlayer
-                  0x000572                  _updateMaze
-                  0x0005a2                  _main
-                  0x0005f4                  _writeColor
-                  0x0006d2                  _drawFrame
-                  0x0006f2                  _packColor
-                  0x000722                  _getR
-                  0x000730                  _getG
-                  0x000744                  _getB
-                  0x000750                  _writePacked
-                  0x000774                  _wheel
-                  0x0007e6                  _delay
-                  0x0007fa                  _lcd_cmd
-                  0x000848                  _lcdinit
-                  0x0008c8                  _lcdSetCursor
-                  0x000906                  _lcdPrintChar
-                  0x000956                  _lcdString
-                  0x0009ec                  _getJoystickDirection
-                  0x000a40                  _joystickSetup
-                  0x000aa2                  _write_1
-                  0x000ab0                  _write_0
-                  0x000abe                  _oneMilliSec
+                  0x00057a                  _updateMaze
+                  0x0005aa                  _main
+                  0x0005fc                  _writeColor
+                  0x0006da                  _drawFrame
+                  0x0006fa                  _packColor
+                  0x00072a                  _getR
+                  0x000738                  _getG
+                  0x00074c                  _getB
+                  0x000758                  _writePacked
+                  0x00077c                  _wheel
+                  0x0007ee                  _delay
+                  0x000802                  _lcd_cmd
+                  0x000850                  _lcdinit
+                  0x0008d0                  _lcdSetCursor
+                  0x00090e                  _lcdPrintChar
+                  0x00095e                  _lcdString
+                  0x0009f4                  _getJoystickDirection
+                  0x000a50                  _joystickSetup
+                  0x000ab2                  _write_1
+                  0x000ac0                  _write_0
+                  0x000ace                  _oneMilliSec
 
 External Symbols in Program Memory (by name):
 
@@ -164,31 +164,31 @@ External Symbols in Program Memory (by name):
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
                   0x0004a0                  _checkPlayer
-                  0x0007e6                  _delay
-                  0x0006d2                  _drawFrame
-                  0x000744                  _getB
-                  0x000730                  _getG
-                  0x0009ec                  _getJoystickDirection
-                  0x000722                  _getR
-                  0x000a40                  _joystickSetup
-                  0x000906                  _lcdPrintChar
-                  0x0008c8                  _lcdSetCursor
-                  0x000956                  _lcdString
-                  0x0007fa                  _lcd_cmd
-                  0x000848                  _lcdinit
-                  0x0005a2                  _main
+                  0x0007ee                  _delay
+                  0x0006da                  _drawFrame
+                  0x00074c                  _getB
+                  0x000738                  _getG
+                  0x0009f4                  _getJoystickDirection
+                  0x00072a                  _getR
+                  0x000a50                  _joystickSetup
+                  0x00090e                  _lcdPrintChar
+                  0x0008d0                  _lcdSetCursor
+                  0x00095e                  _lcdString
+                  0x000802                  _lcd_cmd
+                  0x000850                  _lcdinit
+                  0x0005aa                  _main
                   0x000358                  _mazeSetup
-                  0x000abe                  _oneMilliSec
-                  0x0006f2                  _packColor
+                  0x000ace                  _oneMilliSec
+                  0x0006fa                  _packColor
                   0x000340                  _setup
                   0x000312                  _strlen
-                  0x000572                  _updateMaze
-                  0x000774                  _wheel
-                  0x0005f4                  _writeColor
+                  0x00057a                  _updateMaze
+                  0x00077c                  _wheel
+                  0x0005fc                  _writeColor
                   0x000432                  _writeMaze
-                  0x000750                  _writePacked
-                  0x000ab0                  _write_0
-                  0x000aa2                  _write_1
+                  0x000758                  _writePacked
+                  0x000ac0                  _write_0
+                  0x000ab2                  _write_1
 
 Memory Configuration
 
@@ -269,14 +269,14 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x1fe5
+.debug_info       0x000000       0x1fe8
  *(.debug_info)
  .debug_info      0x000000         0x89 build/default/production/bigBangASM.o
  .debug_info      0x000089        0x2cf build/default/production/ws2812_C_lib.o
  .debug_info      0x000358        0x125 build/default/production/mazeGenerator.o
  .debug_info      0x00047d        0x7fd build/default/production/lcd.o
- .debug_info      0x000c7a        0x4a2 build/default/production/ForeverMaze.o
- .debug_info      0x00111c        0xec9 build/default/production/Joystick.o
+ .debug_info      0x000c7a        0x4a5 build/default/production/ForeverMaze.o
+ .debug_info      0x00111f        0xec9 build/default/production/Joystick.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x4a5
@@ -288,14 +288,14 @@ __CONFIG1
  .debug_abbrev    0x0001e1        0x169 build/default/production/ForeverMaze.o
  .debug_abbrev    0x00034a        0x15b build/default/production/Joystick.o
 
-.debug_line       0x000000        0x4cc
+.debug_line       0x000000        0x4d1
  *(.debug_line)
  .debug_line      0x000000         0x49 build/default/production/bigBangASM.o
  .debug_line      0x000049         0x92 build/default/production/ws2812_C_lib.o
  .debug_line      0x0000db         0x1a build/default/production/mazeGenerator.o
  .debug_line      0x0000f5        0x136 build/default/production/lcd.o
- .debug_line      0x00022b        0x174 build/default/production/ForeverMaze.o
- .debug_line      0x00039f        0x12d build/default/production/Joystick.o
+ .debug_line      0x00022b        0x177 build/default/production/ForeverMaze.o
+ .debug_line      0x0003a2        0x12f build/default/production/Joystick.o
 
 .debug_frame      0x000000        0x2e8
  *(.debug_frame)
@@ -958,19 +958,19 @@ __c30_signature
  .debug_pubtypes
                   0x00019d        0x144 build/default/production/Joystick.o
 
-.nbss               0x0800          0xe
- .nbss              0x0800          0x8 build/default/production/ForeverMaze.o
+.nbss               0x0800         0x10
+ .nbss              0x0800          0xa build/default/production/ForeverMaze.o
                     0x0800                  _playerPrevRow
                     0x0802                  _playerPrevCol
                     0x0804                  _playerRow
                     0x0806                  _playerCol
- .nbss              0x0808          0x6 build/default/production/Joystick.o
-                    0x0808                  _xBuf
-                    0x080a                  _yBuf
+ .nbss              0x080a          0x6 build/default/production/Joystick.o
+                    0x080a                  _xBuf
+                    0x080c                  _yBuf
 
-.bss                0x080e         0x80
- .bss               0x080e         0x80 build/default/production/ForeverMaze.o
-                    0x080e                  _maze
+.bss                0x0810         0x80
+ .bss               0x0810         0x80 build/default/production/ForeverMaze.o
+                    0x0810                  _maze
 
 .config_JTAGEN    0x00abfe          0x2
  .config_JTAGEN
@@ -988,37 +988,37 @@ __c30_signature
  .const             0x831e         0x1c build/default/production/ForeverMaze.o
  .const             0x833a          0x6 build/default/production/Joystick.o
 
-.text             0x000340        0x784
- .text            0x000340        0x2b4 build/default/production/ForeverMaze.o
+.text             0x000340        0x794
+ .text            0x000340        0x2bc build/default/production/ForeverMaze.o
                   0x000340                  _setup
                   0x000358                  _mazeSetup
                   0x000432                  _writeMaze
                   0x0004a0                  _checkPlayer
-                  0x000572                  _updateMaze
-                  0x0005a2                  _main
- .text            0x0005f4        0x206 build/default/production/ws2812_C_lib.o
-                  0x0005f4                  _writeColor
-                  0x0006d2                  _drawFrame
-                  0x0006f2                  _packColor
-                  0x000722                  _getR
-                  0x000730                  _getG
-                  0x000744                  _getB
-                  0x000750                  _writePacked
-                  0x000774                  _wheel
-                  0x0007e6                  _delay
- .text            0x0007fa        0x1f2 build/default/production/lcd.o
-                  0x0007fa                  _lcd_cmd
-                  0x000848                  _lcdinit
-                  0x0008c8                  _lcdSetCursor
-                  0x000906                  _lcdPrintChar
-                  0x000956                  _lcdString
- .text            0x0009ec         0xb6 build/default/production/Joystick.o
-                  0x0009ec                  _getJoystickDirection
-                  0x000a40                  _joystickSetup
- .text            0x000aa2         0x22 build/default/production/bigBangASM.o
-                  0x000aa2                  _write_1
-                  0x000ab0                  _write_0
-                  0x000abe                  _oneMilliSec
+                  0x00057a                  _updateMaze
+                  0x0005aa                  _main
+ .text            0x0005fc        0x206 build/default/production/ws2812_C_lib.o
+                  0x0005fc                  _writeColor
+                  0x0006da                  _drawFrame
+                  0x0006fa                  _packColor
+                  0x00072a                  _getR
+                  0x000738                  _getG
+                  0x00074c                  _getB
+                  0x000758                  _writePacked
+                  0x00077c                  _wheel
+                  0x0007ee                  _delay
+ .text            0x000802        0x1f2 build/default/production/lcd.o
+                  0x000802                  _lcd_cmd
+                  0x000850                  _lcdinit
+                  0x0008d0                  _lcdSetCursor
+                  0x00090e                  _lcdPrintChar
+                  0x00095e                  _lcdString
+ .text            0x0009f4         0xbe build/default/production/Joystick.o
+                  0x0009f4                  _getJoystickDirection
+                  0x000a50                  _joystickSetup
+ .text            0x000ab2         0x22 build/default/production/bigBangASM.o
+                  0x000ab2                  _write_1
+                  0x000ac0                  _write_0
+                  0x000ace                  _oneMilliSec
 
-.dinit            0x000ac4         0x14
- .dinit           0x000ac4         0x14 data_init
+.dinit            0x000ad4         0x14
+ .dinit           0x000ad4         0x14 data_init
