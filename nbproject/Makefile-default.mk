@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=bigBangASM.s ws2812_C_lib.c ForeverMaze.c mazeGenerator.c
+SOURCEFILES_QUOTED_IF_SPACED=bigBangASM.s ws2812_C_lib.c mazeGenerator.c lcd.c ForeverMaze.c Joystick.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/bigBangASM.o ${OBJECTDIR}/ws2812_C_lib.o ${OBJECTDIR}/ForeverMaze.o ${OBJECTDIR}/mazeGenerator.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/bigBangASM.o.d ${OBJECTDIR}/ws2812_C_lib.o.d ${OBJECTDIR}/ForeverMaze.o.d ${OBJECTDIR}/mazeGenerator.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/bigBangASM.o ${OBJECTDIR}/ws2812_C_lib.o ${OBJECTDIR}/mazeGenerator.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/ForeverMaze.o ${OBJECTDIR}/Joystick.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/bigBangASM.o.d ${OBJECTDIR}/ws2812_C_lib.o.d ${OBJECTDIR}/mazeGenerator.o.d ${OBJECTDIR}/lcd.o.d ${OBJECTDIR}/ForeverMaze.o.d ${OBJECTDIR}/Joystick.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/bigBangASM.o ${OBJECTDIR}/ws2812_C_lib.o ${OBJECTDIR}/ForeverMaze.o ${OBJECTDIR}/mazeGenerator.o
+OBJECTFILES=${OBJECTDIR}/bigBangASM.o ${OBJECTDIR}/ws2812_C_lib.o ${OBJECTDIR}/mazeGenerator.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/ForeverMaze.o ${OBJECTDIR}/Joystick.o
 
 # Source Files
-SOURCEFILES=bigBangASM.s ws2812_C_lib.c ForeverMaze.c mazeGenerator.c
+SOURCEFILES=bigBangASM.s ws2812_C_lib.c mazeGenerator.c lcd.c ForeverMaze.c Joystick.c
 
 
 CFLAGS=
@@ -101,6 +101,20 @@ ${OBJECTDIR}/ws2812_C_lib.o: ws2812_C_lib.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ws2812_C_lib.c  -o ${OBJECTDIR}/ws2812_C_lib.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ws2812_C_lib.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/ws2812_C_lib.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/mazeGenerator.o: mazeGenerator.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/mazeGenerator.o.d 
+	@${RM} ${OBJECTDIR}/mazeGenerator.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  mazeGenerator.c  -o ${OBJECTDIR}/mazeGenerator.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/mazeGenerator.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/mazeGenerator.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/lcd.o: lcd.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/lcd.o.d 
+	@${RM} ${OBJECTDIR}/lcd.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  lcd.c  -o ${OBJECTDIR}/lcd.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/lcd.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/lcd.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 ${OBJECTDIR}/ForeverMaze.o: ForeverMaze.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ForeverMaze.o.d 
@@ -108,12 +122,12 @@ ${OBJECTDIR}/ForeverMaze.o: ForeverMaze.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ForeverMaze.c  -o ${OBJECTDIR}/ForeverMaze.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ForeverMaze.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/ForeverMaze.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/mazeGenerator.o: mazeGenerator.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/Joystick.o: Joystick.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/mazeGenerator.o.d 
-	@${RM} ${OBJECTDIR}/mazeGenerator.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  mazeGenerator.c  -o ${OBJECTDIR}/mazeGenerator.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/mazeGenerator.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/mazeGenerator.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	@${RM} ${OBJECTDIR}/Joystick.o.d 
+	@${RM} ${OBJECTDIR}/Joystick.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Joystick.c  -o ${OBJECTDIR}/Joystick.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Joystick.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/Joystick.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 else
 ${OBJECTDIR}/ws2812_C_lib.o: ws2812_C_lib.c  nbproject/Makefile-${CND_CONF}.mk
@@ -123,6 +137,20 @@ ${OBJECTDIR}/ws2812_C_lib.o: ws2812_C_lib.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ws2812_C_lib.c  -o ${OBJECTDIR}/ws2812_C_lib.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ws2812_C_lib.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/ws2812_C_lib.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/mazeGenerator.o: mazeGenerator.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/mazeGenerator.o.d 
+	@${RM} ${OBJECTDIR}/mazeGenerator.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  mazeGenerator.c  -o ${OBJECTDIR}/mazeGenerator.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/mazeGenerator.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/mazeGenerator.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/lcd.o: lcd.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/lcd.o.d 
+	@${RM} ${OBJECTDIR}/lcd.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  lcd.c  -o ${OBJECTDIR}/lcd.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/lcd.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/lcd.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 ${OBJECTDIR}/ForeverMaze.o: ForeverMaze.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ForeverMaze.o.d 
@@ -130,12 +158,12 @@ ${OBJECTDIR}/ForeverMaze.o: ForeverMaze.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ForeverMaze.c  -o ${OBJECTDIR}/ForeverMaze.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ForeverMaze.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/ForeverMaze.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/mazeGenerator.o: mazeGenerator.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/Joystick.o: Joystick.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/mazeGenerator.o.d 
-	@${RM} ${OBJECTDIR}/mazeGenerator.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  mazeGenerator.c  -o ${OBJECTDIR}/mazeGenerator.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/mazeGenerator.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/mazeGenerator.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	@${RM} ${OBJECTDIR}/Joystick.o.d 
+	@${RM} ${OBJECTDIR}/Joystick.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Joystick.c  -o ${OBJECTDIR}/Joystick.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Joystick.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/Joystick.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

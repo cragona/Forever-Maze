@@ -1,26 +1,4 @@
 #include <p24Fxxxx.h>
-#include <xc.h>
-
-// PIC24FJ64GA002 Configuration Bit Settings
-// CW1: FLASH CONFIGURATION WORD 1 (see PIC24 Family Reference Manual 24.1)
-#pragma config ICS = PGx1          // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
-#pragma config FWDTEN = OFF        // Watchdog Timer Enable (Watchdog Timer is disabled)
-#pragma config GWRP = OFF          // General Code Segment Write Protect (Writes to program memory are allowed)
-#pragma config GCP = OFF           // General Code Segment Code Protect (Code protection is disabled)
-#pragma config JTAGEN = OFF        // JTAG Port Enable (JTAG port is disabled)
-
-
-// CW2: FLASH CONFIGURATION WORD 2 (see PIC24 Family Reference Manual 24.1)
-#pragma config POSCMOD = NONE           // Primary Oscillator Select (Primary oscillator disabled. 
-					// Primary Oscillator refers to an external osc connected to the OSC1 and OSC2 pins)
-#pragma config I2C1SEL = PRI       // I2C1 Pin Location Select (Use default SCL1/SDA1 pins)
-#pragma config IOL1WAY = OFF       // IOLOCK Protection (IOLOCK may be changed via unlocking seq)
-#pragma config OSCIOFNC = ON       // OSC2/CLKO/RC15 functions as port I/O (RC15)
-#pragma config FCKSM = CSECME      // Clock Switching and Monitor (Clock switching is enabled, 
-                                       // Fail-Safe Clock Monitor is enabled)
-#pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
-
-
 #include "xc.h"
 #include "lcdlib.h"
 
@@ -48,11 +26,34 @@ void __attribute__((__interrupt__,__auto_psv__)) _ADC1Interrupt(void)
     count &= 3;
 }
 
-
-void setup(void)
+int getJoystickDirection(void)
 {
-    CLKDIVbits.RCDIV = 0;
-    AD1PCFG = 0xFFFC; //set up AN0, AN1; Other pins digA
+    //left = 1, up = 2, right = 3, down = 4, center = 5
+    int direction;
+    
+    AD1CON1bits.ASAM = 1; //start sample
+    while(!IFS0bits.AD1IF){}; //wait until conversion time
+    AD1CON1bits.ASAM = 0; //shut off sampling to start conversion
+
+    
+    if(xBuf > 520) //x-left
+        direction = 1;
+    else if(xBuf < 500) //x-right
+        direction = 3;
+    else if(yBuf > 550) //y-down
+        direction = 4;
+    else if(yBuf < 400) //y-up
+        direction = 2;
+    else 
+        direction = 5;
+    
+    return direction;
+}
+
+
+void joystickSetup(void)
+{
+    TRISA = 0b11;
     
     //Setting up ADC
     AD1CON1 = 0;
@@ -78,15 +79,8 @@ void setup(void)
     _AD1IF = 0; //clear AD IF int
     
     _ADON = 1;
-}
-int main(void) {
-    setup();
     
-    //lcd test stuff
-    TRISA = 0b11;
-    TRISBbits.TRISB6 = 0;
-    
-    //i2c setup
+     //i2c setup
     I2C2CONbits.I2CEN = 0; //disable
     I2C2BRG = 0x9D; //100 kHz
     I2C2CONbits.I2CEN = 1; //enable
@@ -100,42 +94,5 @@ int main(void) {
     T1CONbits.TON = 1;
     lcdinit();
     lcdSetCursor(0,0);
-    lcdString("2");
-    
-    while(1)
-    {
-
-        AD1CON1bits.ASAM = 1; //start sample
-        while(!IFS0bits.AD1IF){}; //wait until conversion time
-        AD1CON1bits.ASAM = 0; //shut off sampling to start conversion
- 
-        int i;
-        for(i = 200; i > 0; i--)
-        {
-            while(!IFS0bits.T1IF){}
-            _T1IF = 0;
-        }
-        
-        
-        if(xBuf > 520) //x-left
-            lcdString("x-right");
-        else if(xBuf < 500) //x-right
-            lcdString("x-left");
-        else if(yBuf > 550) //y-down
-            lcdString("y-down");
-        else if(yBuf < 400) //y-up
-            lcdString("y-up");
-        else 
-            lcdString("center");
-        
-        for(i = 200; i > 0; i--)
-        {
-            while(!IFS0bits.T1IF){}
-            _T1IF = 0;
-        }
-        lcd_cmd(1); //clear display
-        
-        
-    }
-    return 0;
+    lcdString("test");
 }

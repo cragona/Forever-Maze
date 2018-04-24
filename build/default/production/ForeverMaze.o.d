@@ -1,4 +1,5 @@
 build/default/production/ForeverMaze.o:  \
 ForeverMaze.c  \
-mazeGenerationlib.h  \
- ws2812lib.h 
+lcdlib.h  \
+ joysticklib.h  \
+ws2812lib.h 
