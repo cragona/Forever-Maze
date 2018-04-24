@@ -35,7 +35,7 @@ int getJoystickDirection(void)
     while(!IFS0bits.AD1IF){}; //wait until conversion time
     AD1CON1bits.ASAM = 0; //shut off sampling to start conversion
     
-    if(xBuf > 500) //x-left
+    if(xBuf > 550) //x-left
         direction = 1;
     else if(xBuf < 400) //x-right
         direction = 3;
@@ -65,7 +65,6 @@ void joystickSetup(void)
     //Set ANx to scan
     AD1CON2bits.CSCNA = 1; //enable multiplexing
     AD1CON2bits.SMPI = 1;  //take 1 sample before interrupt
-   // AD1CON2bits.BUFM = 1; //dual, 8 word segments
     AD1CON2bits.ALTS = 0; //set to use for MUX A
     AD1CON1bits.SSRC = 0b111;
     
