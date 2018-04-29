@@ -11,19 +11,8 @@ volatile int xBuf, yBuf;
 void __attribute__((__interrupt__,__auto_psv__)) _ADC1Interrupt(void)
 {
     _AD1IF = 0;
-    
-    static int count;
-    
-    int check = count % 2;
-    
-    if(!check)
-        xBuf = ADC1BUF0;
-    else
-        yBuf = ADC1BUF1;
-    
-    count++;
-    
-    count &= 3;
+    xBuf = ADC1BUF0;
+    yBuf = ADC1BUF1;
 }
 
 int getJoystickDirection(void)
