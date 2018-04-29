@@ -3,7 +3,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "lcdlib.h"
-
 #include "joysticklib.h"
 #include "ws2812lib.h"
 
@@ -42,7 +41,16 @@ void setup(void)
 void mazeSetup(void)
 {
     int i,j;
+    static int prevMaze;
     int r = rand() % 20; //generates random number b/w 0-19
+    
+    //maze sure we dont get 2 of the same maze in a row
+    while(r == prevMaze)
+    {
+        r = rand() % 20;
+    }
+    
+    prevMaze = r;
     
     if(r == 0)
     {
@@ -497,6 +505,7 @@ void writeMaze(void)
     int i, j;
     
     static int red = 0, blue = 0, green = 0, breath = 0;
+    
     for(i = 0; i < 8; i++)
     {
         for(j = 0; j < 8; j++)

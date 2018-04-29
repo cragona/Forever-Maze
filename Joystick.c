@@ -22,13 +22,14 @@ int getJoystickDirection(void)
     //left = 1, up = 2, right = 3, down = 4, center = 5
     int direction;
     
+    //auto sample start - TAD based conversion
     AD1CON1bits.ASAM = 1; //start sample
     while(!IFS0bits.AD1IF){}; //wait until conversion time
     AD1CON1bits.ASAM = 0; //shut off sampling to start conversion
     
-    if(xBuf > 550) //x-left
+    if(xBuf > 550) //x-right
         direction = 1;
-    else if(xBuf < 400) //x-right
+    else if(xBuf < 400) //x-left
         direction = 3;
     else if(yBuf > 550) //y-down
         direction = 4;
@@ -37,6 +38,7 @@ int getJoystickDirection(void)
     else 
         direction = 5;
     
+    //recenter x and y Bufs
     xBuf = 500;
     yBuf = 500;
     
@@ -53,8 +55,8 @@ void joystickSetup(void)
     AD1CON3 = 0;
     
     //Set ANx to scan
-    AD1CON2bits.CSCNA = 1; //enable multiplexing
-    AD1CON2bits.SMPI = 1;  //take 1 sample before interrupt
+    AD1CON2bits.CSCNA = 1; //enable scanning
+    AD1CON2bits.SMPI = 1;  //take 2 sample before interrupt
     AD1CON2bits.ALTS = 0; //set to use for MUX A
     AD1CON1bits.SSRC = 0b111;
     
