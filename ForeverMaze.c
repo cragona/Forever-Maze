@@ -26,7 +26,7 @@
 // Fail-Safe Clock Monitor is enabled)
 #pragma config FNOSC = FRCPLL // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
-#define PLAYERSPEED 60 //Period (1/FrameRate) in milliseconds
+#define PLAYERSPEED 60 //sets framerate of movement / led pulse sending. In ms.
 
 volatile static int playerPrevRow = 0, playerPrevCol = 0, playerRow = 0, playerCol = 0;
 volatile static int maze[8][8];
@@ -421,14 +421,14 @@ void mazeSetup(void)
     else if(r == 17)
     {
         volatile int premade[8][8] = {
-                {0,1,1,1,1,1,1,1},
-				{0,0,0,0,1,1,1,1},
-				{1,1,0,0,0,0,0,1},
-				{0,1,0,1,1,1,0,1},
-				{0,0,0,1,1,1,0,1},
-				{0,0,1,1,1,1,0,1},
-				{1,0,1,1,1,1,0,0},
-				{1,0,1,1,1,1,1,0}
+            {0,1,1,1,1,1,1,1},
+            {0,0,0,0,1,1,1,1},
+            {1,1,0,0,0,0,0,1},
+            {0,1,0,1,1,1,0,1},
+            {0,0,0,1,1,1,0,1},
+            {0,0,1,1,1,1,0,1},
+            {1,0,1,1,1,1,0,0},
+            {1,0,1,1,1,1,1,0}
         };
         
         for(i = 0; i < 8; i++)
@@ -443,14 +443,14 @@ void mazeSetup(void)
     else if(r == 18)
     {
         volatile int premade[8][8] = {
-                {0,0,0,0,0,0,0,0},
-				{1,1,1,1,1,1,1,0},
-				{0,0,0,0,0,0,0,0},
-				{0,1,1,1,1,1,1,1},
-				{0,0,0,0,0,0,0,0},
-				{1,1,1,1,1,1,1,0},
-				{1,1,1,1,1,1,1,0},
-				{1,1,1,1,1,1,1,0}
+            {0,0,0,0,0,0,0,0},
+            {1,1,1,1,1,1,1,0},
+            {0,0,0,0,0,0,0,0},
+            {0,1,1,1,1,1,1,1},
+            {0,0,0,0,0,0,0,0},
+            {1,1,1,1,1,1,1,0},
+            {1,1,1,1,1,1,1,0},
+            {1,1,1,1,1,1,1,0}
         };
         
         for(i = 0; i < 8; i++)
@@ -465,14 +465,14 @@ void mazeSetup(void)
     else if(r == 19)
     {
         volatile int premade[8][8] = {
-                {0,1,0,0,0,0,1,1},
-				{0,1,0,1,1,0,1,1},
-				{0,1,0,1,1,0,1,1},
-				{0,1,0,1,1,0,0,0},
-				{0,1,0,1,1,1,1,0},
-				{0,1,0,0,0,0,1,0},
-				{0,1,1,1,1,0,1,0},
-				{0,0,0,0,0,0,1,0}
+            {0,1,0,0,0,0,1,1},
+            {0,1,0,1,1,0,1,1},
+            {0,1,0,1,1,0,1,1},
+            {0,1,0,1,1,0,0,0},
+            {0,1,0,1,1,1,1,0},
+            {0,1,0,0,0,0,1,0},
+            {0,1,1,1,1,0,1,0},
+            {0,0,0,0,0,0,1,0}
         };
         
         for(i = 0; i < 8; i++)
@@ -487,6 +487,11 @@ void mazeSetup(void)
     maze[playerRow][playerCol] = 8;
 }
 
+//this scans the double array and as it is scanning it sends the correct color
+//for the intended item in the array. Breath effect for wall, green for player, 
+//pink for end zone, and no color for path.
+
+//the breath effect moves from blue, green, red, then resets
 void writeMaze(void)
 {
     int i, j;
@@ -496,14 +501,14 @@ void writeMaze(void)
     {
         for(j = 0; j < 8; j++)
         {
-            if(maze[i][j] == 1)
+            if(maze[i][j] == 1) //walls
                 writeColor(green, red, blue);
-            else if(maze[i][j] == 8)
+            else if(maze[i][j] == 8) //this is the player
                 writeColor(22,0,0);
-            else if(i == 7 && j == 7)      
+            else if(i == 7 && j == 7) //end zone  
                 writeColor(0,22,22);     
             else
-                writeColor(0, 0, 0);
+                writeColor(0, 0, 0);//path
         }
     }
     
@@ -537,10 +542,12 @@ void writeMaze(void)
     delay(1); //set hold/reset for maze
 }
 
+//checks the player value against the direction sent by the joystick sampling
+//has bound checking for walls and out of bounds
 void checkPlayer(int direction)
 {
     //left = 3, up = 2, right = 1, down = 4, center = 5
-    playerPrevRow = playerRow;
+    playerPrevRow = playerRow; //pass position to previous 
     playerPrevCol = playerCol;
     
     switch(direction)
@@ -578,7 +585,7 @@ void checkPlayer(int direction)
             else if(maze[playerRow + 1][playerCol] == 1)
                 break;
             else
-                playerRow++;
+                playerRow++; //move down
             break;
             
         default: //5 - center
@@ -586,6 +593,8 @@ void checkPlayer(int direction)
     }
 }
 
+//updates the player position
+//it then clears the last position and updates the new one
 void updateMaze(int direction)
 {
     checkPlayer(direction);
@@ -599,17 +608,21 @@ int main(void) {
  
     while(1)
     {
+        //new maze has started, place player at start
         playerRow = 0; //start row
         playerCol = 0; //start col
         srand(time(NULL)); //change seed every pass
-        mazeSetup();
+        mazeSetup(); 
         
+        //stay in current maze until player has solved it
+        //7,7 is the maze end
         while(maze[7][7] != 8)
         {
             playerDirection = getJoystickDirection();
             updateMaze(playerDirection);
             writeMaze();
 
+            //used mainly for debugging
             if(playerDirection == 3) //x-left
                 lcdString("left");
             else if(playerDirection == 1) //x-right
