@@ -8,6 +8,7 @@
 //y will be an1, assign ADC1BUF 1
 volatile int xBuf, yBuf;
 
+//add buffer to variable for checking
 void __attribute__((__interrupt__,__auto_psv__)) _ADC1Interrupt(void)
 {
     _AD1IF = 0;
@@ -15,6 +16,7 @@ void __attribute__((__interrupt__,__auto_psv__)) _ADC1Interrupt(void)
     yBuf = ADC1BUF1;
 }
 
+//gather samples, pass direction via if-else-if, set xyBuf back to center
 int getJoystickDirection(void)
 {
     //left = 1, up = 2, right = 3, down = 4, center = 5
@@ -40,7 +42,6 @@ int getJoystickDirection(void)
     
     return direction;
 }
-
 
 void joystickSetup(void)
 {
