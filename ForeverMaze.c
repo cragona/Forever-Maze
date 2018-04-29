@@ -26,10 +26,10 @@
 // Fail-Safe Clock Monitor is enabled)
 #pragma config FNOSC = FRCPLL // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
-#define PLAYERSPEED 120 //Period (1/FrameRate) in milliseconds
+#define PLAYERSPEED 60 //Period (1/FrameRate) in milliseconds
 
-volatile int playerPrevRow = 0, playerPrevCol = 0, playerRow = 0, playerCol = 0;
-volatile int maze[8][8];
+volatile static int playerPrevRow = 0, playerPrevCol = 0, playerRow = 0, playerCol = 0;
+volatile static int maze[8][8];
 
 void setup(void)
 {
@@ -41,73 +41,511 @@ void setup(void)
 
 void mazeSetup(void)
 {
+    int i,j;
+    int r = rand() % 20; //generates random number b/w 0-19
     
-    int i, j;
-    for(i = 0; i < 8; i++)
+    if(r == 0)
     {
-        for(j = 0; j < 8; j++)
+        volatile int premade[8][8] = {
+                {0,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1},
+				{0,0,0,0,0,0,1,1},
+				{1,1,1,1,1,0,0,0},
+				{1,1,1,1,1,1,1,0},
+				{1,1,1,1,1,1,1,0},
+				{1,1,1,1,1,1,1,0},
+				{1,1,1,1,1,1,1,0}
+        };
+        
+        for(i = 0; i < 8; i++)
         {
-            maze[i][j] = 1;
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
         }
-    }
+    }	
     
-    maze[0][0] = 0;
-    maze[0][3] = 0;
-    maze[0][6] = 0;
+    else if(r == 1)
+    {
+        volatile int premade[8][8] = {
+                {0,0,0,0,0,0,0,0},
+				{1,1,0,1,1,1,1,0},
+				{1,1,0,1,1,1,1,0},
+				{1,1,0,1,1,1,1,0},
+				{1,1,0,1,1,1,1,0},
+				{1,1,0,1,1,1,1,0},
+				{1,1,0,0,0,0,1,0},
+				{1,1,1,1,1,1,1,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
     
-    maze[1][0] = 0;
-    maze[1][2] = 0;
-    maze[1][3] = 0;
-    maze[1][4] = 0;
-    maze[1][5] = 0;
-    maze[1][6] = 0;
+    else if(r == 2)
+    {
+        volatile int premade[8][8] = {
+                {0,1,1,1,1,1,1,0},
+				{0,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1},
+				{0,0,0,0,0,0,0,0},
+				{1,1,1,0,1,1,1,0},
+				{0,0,0,0,1,1,1,0},
+				{0,1,0,0,1,1,1,0},
+				{0,0,0,0,1,1,1,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
     
-    maze[2][0] = 0;
-    maze[2][2] = 0;
-    maze[2][4] = 0;
-    maze[2][6] = 0;
-    maze[2][7] = 0;
+    else if(r == 3)
+    {
+        volatile int premade[8][8] = {
+                {0,1,1,1,1,1,1,1},
+				{0,0,1,1,1,1,1,1},
+				{1,0,1,1,1,1,1,1},
+				{1,0,0,0,0,0,0,0},
+				{0,1,1,1,1,1,1,0},
+				{0,1,1,1,1,1,1,0},
+				{0,1,1,1,1,1,1,0},
+				{0,1,1,1,1,1,1,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
     
-    maze[3][0] = 0;
-    maze[3][2] = 0;
-    maze[3][4] = 0;
+    else if(r == 4)
+    {
+        volatile int premade[8][8] = {
+                {0,0,1,0,1,0,1,0},
+				{0,0,1,0,1,0,0,0},
+				{0,0,1,0,1,0,1,0},
+				{0,0,1,0,1,0,0,0},
+				{0,0,0,0,0,0,1,0},
+				{1,0,1,1,1,0,0,0},
+				{1,0,1,1,1,0,0,0},
+				{1,0,1,1,1,0,1,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
     
-    for(i = 0; i < 8; i++)
-        maze[4][i] = 0;
+    else if(r == 5)
+    {
+        volatile int premade[8][8] = {
+                {0,0,0,0,1,1,1,1},
+				{0,1,1,1,0,1,1,1},
+				{0,0,0,0,0,0,1,1},
+				{0,0,0,1,0,1,0,1},
+				{0,0,0,0,0,0,1,0},
+				{0,1,1,1,0,1,0,1},
+				{0,0,0,0,0,0,1,1},
+				{1,1,0,0,0,0,0,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
     
-    maze[5][0] = 0;
-    maze[5][3] = 0;
-    maze[5][5] = 0;
-    maze[5][7] = 0;
+    else if(r == 6)
+    {
+        volatile int premade[8][8] = {
+                {0,0,0,0,0,0,1,1},
+                {1,1,0,1,1,0,0,0},
+                {0,0,0,1,1,0,1,1},
+                {0,1,1,1,0,0,0,1},
+                {0,0,1,1,0,1,0,0},
+                {1,0,0,1,0,1,0,1},
+                {1,1,0,1,0,1,0,1},
+                {1,1,0,0,0,1,0,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
     
-    maze[6][0] = 0;
-    maze[6][3] = 0;
-    maze[6][5] = 0;
-    maze[6][7] = 0;
+    else if(r == 7)
+    {
+        volatile int premade[8][8] = {
+                {0,1,0,0,0,1,0,1},
+                {0,1,0,1,0,0,0,1},
+                {0,0,0,1,0,1,0,1},
+                {1,1,1,1,0,1,0,0},
+                {0,0,0,0,0,1,0,1},
+                {0,1,1,1,1,1,1,1},
+                {0,1,1,0,0,0,1,1},
+                {0,0,0,0,1,0,0,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
     
-    maze[7][3] = 0;
-    maze[7][4] = 0;
-    maze[7][5] = 0;
-    maze[7][7] = 0;
-  
+    else if(r == 8)
+    {
+        volatile int premade[8][8] = {
+                {0,0,1,1,0,0,0,0},
+                {1,0,0,1,1,0,1,0},
+                {1,0,1,1,0,0,1,0},
+                {0,0,1,0,0,1,1,0},
+                {0,1,1,0,1,1,0,0},
+                {0,1,0,0,1,0,0,1},
+                {0,1,1,0,1,1,0,1},
+                {0,0,0,0,1,1,0,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
+    
+    else if(r == 9)
+    {
+        volatile int premade[8][8] = {
+                {0,1,1,0,0,0,0,0},
+                {0,1,1,0,1,0,1,0},
+                {0,0,0,0,1,0,1,0},
+                {1,1,1,1,1,0,1,0},
+                {1,0,0,0,0,0,1,1},
+                {1,0,1,1,1,1,0,0},
+                {0,0,1,0,0,0,0,0},
+                {1,0,0,0,1,1,1,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
+    
+    else if(r == 10)
+    {
+        volatile int premade[8][8] = {
+                {0,1,1,0,0,0,0,0},
+                {0,1,1,0,1,0,1,0},
+                {0,0,0,0,1,0,1,0},
+                {1,1,1,1,1,0,1,0},
+                {1,0,0,0,0,0,1,1},
+                {1,0,1,1,1,1,0,0},
+                {0,0,1,0,0,0,0,0},
+                {1,0,0,0,1,1,1,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
+    
+    else if(r == 11)
+    {
+        volatile int premade[8][8] = {
+                {0,1,1,0,0,0,1,0},
+                {0,0,1,0,1,0,1,0},
+                {0,1,1,0,1,0,0,0},
+                {0,1,0,0,1,1,1,0},
+                {0,1,0,1,1,0,0,0},
+                {0,1,0,1,0,0,1,1},
+                {0,1,0,1,0,1,1,1},
+                {0,0,0,1,0,0,0,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
+    
+    else if(r == 12)
+    {
+        volatile int premade[8][8] = {
+                {0,0,0,0,0,0,1,1},
+                {1,0,0,1,0,0,0,0},
+                {1,0,0,1,1,1,1,1},
+                {0,0,1,1,0,0,0,0},
+                {0,0,0,0,1,0,1,0},
+                {0,1,0,1,0,1,1,0},
+                {1,1,0,1,0,0,0,1},
+                {0,1,0,0,0,1,0,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
+    
+    else if(r == 13)
+    {
+        volatile int premade[8][8] = {
+                {0,1,1,1,1,1,1,1},
+                {0,0,0,1,0,0,0,0},
+                {1,0,0,1,0,1,1,0},
+                {1,0,1,1,0,1,0,0},
+                {1,0,1,1,0,1,0,1},
+                {1,0,1,0,0,1,0,0},
+                {1,0,0,0,0,0,1,0},
+                {1,1,1,1,1,1,1,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
+    
+    else if(r == 14)
+    {
+        volatile int premade[8][8] = {
+                {0,0,0,1,1,0,0,1},
+                {1,1,0,0,0,0,1,0},
+                {0,1,0,0,1,1,1,1},
+                {1,0,1,0,0,0,0,0},
+                {1,0,0,0,1,1,0,1},
+                {1,0,0,0,0,1,0,0},
+                {1,1,1,0,0,0,1,0},
+                {0,1,0,0,1,1,0,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
+    
+    else if(r == 15)
+    {
+        volatile int premade[8][8] = {
+                {0,1,1,0,0,0,0,1},
+                {0,0,0,0,1,1,0,1},
+                {1,1,0,0,1,0,0,0},
+                {0,1,1,0,0,1,1,0},
+                {0,0,0,1,0,0,1,0},
+                {0,1,0,0,0,1,0,0},
+                {0,1,0,1,0,1,0,1},
+                {0,0,0,1,1,1,0,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
+    
+    else if(r == 16)
+    {
+        volatile int premade[8][8] = {
+                {0,0,0,0,1,1,1,0},
+                {1,0,1,0,0,1,1,1},
+                {0,1,1,1,0,0,0,0},
+                {0,0,1,0,0,0,1,0},
+                {1,0,1,0,1,0,1,0},
+                {0,1,1,0,0,1,0,0},
+                {0,1,1,1,0,1,0,1},
+                {0,0,0,0,1,1,0,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
+    
+    else if(r == 17)
+    {
+        volatile int premade[8][8] = {
+                {0,1,1,1,1,1,1,1},
+				{0,0,0,0,1,1,1,1},
+				{1,1,0,0,0,0,0,1},
+				{0,1,0,1,1,1,0,1},
+				{0,0,0,1,1,1,0,1},
+				{0,0,1,1,1,1,0,1},
+				{1,0,1,1,1,1,0,0},
+				{1,0,1,1,1,1,1,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
+    
+    else if(r == 18)
+    {
+        volatile int premade[8][8] = {
+                {0,0,0,0,0,0,0,0},
+				{1,1,1,1,1,1,1,0},
+				{0,0,0,0,0,0,0,0},
+				{0,1,1,1,1,1,1,1},
+				{0,0,0,0,0,0,0,0},
+				{1,1,1,1,1,1,1,0},
+				{1,1,1,1,1,1,1,0},
+				{1,1,1,1,1,1,1,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
+    
+    else if(r == 19)
+    {
+        volatile int premade[8][8] = {
+                {0,1,0,0,0,0,1,1},
+				{0,1,0,1,1,0,1,1},
+				{0,1,0,1,1,0,1,1},
+				{0,1,0,1,1,0,0,0},
+				{0,1,0,1,1,1,1,0},
+				{0,1,0,0,0,0,1,0},
+				{0,1,1,1,1,0,1,0},
+				{0,0,0,0,0,0,1,0}
+        };
+        
+        for(i = 0; i < 8; i++)
+        {
+            for(j = 0; j < 8; j++)
+            {
+                maze[i][j] = premade[i][j];
+            }
+        }
+    }	
+    
     maze[playerRow][playerCol] = 8;
 }
 
 void writeMaze(void)
 {
     int i, j;
+    //static int count = 22;
+    
+    static int red = 0, blue = 0, green = 0, breath = 0;
     for(i = 0; i < 8; i++)
     {
         for(j = 0; j < 8; j++)
         {
             if(maze[i][j] == 1)
-                writeColor(0,0,23);
+                writeColor(green, red, blue);
             else if(maze[i][j] == 8)
                 writeColor(22,0,0);
+            else if(i == 7 && j == 7)      
+                writeColor(0,22,22);     
             else
                 writeColor(0, 0, 0);
         }
     }
+//    
+//    count --;
+//    
+//    if(count <= 0)
+//    {
+//        count = 255;
+//    }
+    
+    if(breath <= 30)
+    {
+        if(breath > 15)
+            blue--;
+        else
+            blue++;
+        
+        
+    }
+    else if(breath <= 60 && breath > 30)
+    {
+        if(breath > 45)
+            red--;
+        else
+            red++;   
+    }
+    else if(breath > 60 && breath <= 90)        
+    {    
+        if(breath > 75)
+            green--;
+        else
+            green++;
+    }
+    
+  
+    if(breath == 90)
+        breath = 0;
+        
+    breath++;
+    
+    
     delay(1); //set hold/reset for maze
 }
 
@@ -135,7 +573,7 @@ void checkPlayer(int direction)
             break;
         else
             playerRow--; //move up
-        break;
+        return;
         
         case 3://left
             if(playerCol == 0)//out of bounds move
@@ -169,36 +607,40 @@ void updateMaze(int direction)
 
 int main(void) {
     setup();
-    
-    mazeSetup();
-     
     static int playerDirection;
-    
-    playerRow = 0; //start row
-    playerCol = 0; //start col
-    
+ 
     while(1)
     {
+        playerRow = 0; //start row
+        playerCol = 0; //start col
+        srand(time(NULL)); //change seed
+        mazeSetup();
         
-        playerDirection = getJoystickDirection();
-        updateMaze(playerDirection);
-        writeMaze();
+        while(maze[7][7] != 8)
+        {
+            
         
-  
-        if(playerDirection == 3) //x-left
-            lcdString("left");
-        else if(playerDirection == 1) //x-right
-            lcdString("right");
-        else if(playerDirection == 4) //y-down
-            lcdString("down");
-        else if(playerDirection == 2) //y-up
-            lcdString("up");
-        else 
-            lcdString("no move");
+            playerDirection = getJoystickDirection();
+            updateMaze(playerDirection);
+            writeMaze();
+
+
+            if(playerDirection == 3) //x-left
+                lcdString("left");
+            else if(playerDirection == 1) //x-right
+                lcdString("right");
+            else if(playerDirection == 4) //y-down
+                lcdString("down");
+            else if(playerDirection == 2) //y-up
+                lcdString("up");
+            else 
+                lcdString("no move");
+
+            delay(PLAYERSPEED);
+
+            lcd_cmd(1); //clear display
         
-        delay(PLAYERSPEED);
-        
-        lcd_cmd(1); //clear display
+        }
 
     }
     return 0;
