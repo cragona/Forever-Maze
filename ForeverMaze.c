@@ -490,7 +490,6 @@ void mazeSetup(void)
 void writeMaze(void)
 {
     int i, j;
-    //static int count = 22;
     
     static int red = 0, blue = 0, green = 0, breath = 0;
     for(i = 0; i < 8; i++)
@@ -507,22 +506,13 @@ void writeMaze(void)
                 writeColor(0, 0, 0);
         }
     }
-//    
-//    count --;
-//    
-//    if(count <= 0)
-//    {
-//        count = 255;
-//    }
     
-    if(breath <= 30)
+    if(breath <= 30) //blue in and out
     {
         if(breath > 15)
             blue--;
         else
             blue++;
-        
-        
     }
     else if(breath <= 60 && breath > 30)
     {
@@ -539,19 +529,17 @@ void writeMaze(void)
             green++;
     }
     
-  
     if(breath == 90)
         breath = 0;
         
     breath++;
-    
-    
+      
     delay(1); //set hold/reset for maze
 }
 
 void checkPlayer(int direction)
 {
-    //left = 1, up = 2, right = 3, down = 4, center = 5
+    //left = 3, up = 2, right = 1, down = 4, center = 5
     playerPrevRow = playerRow;
     playerPrevCol = playerCol;
     
@@ -597,13 +585,13 @@ void checkPlayer(int direction)
             break;
     }
 }
+
 void updateMaze(int direction)
 {
     checkPlayer(direction);
     maze[playerPrevRow][playerPrevCol] = 0;
     maze[playerRow][playerCol] = 8;
 }
-
 
 int main(void) {
     setup();
@@ -613,17 +601,14 @@ int main(void) {
     {
         playerRow = 0; //start row
         playerCol = 0; //start col
-        srand(time(NULL)); //change seed
+        srand(time(NULL)); //change seed every pass
         mazeSetup();
         
         while(maze[7][7] != 8)
         {
-            
-        
             playerDirection = getJoystickDirection();
             updateMaze(playerDirection);
             writeMaze();
-
 
             if(playerDirection == 3) //x-left
                 lcdString("left");
@@ -639,7 +624,6 @@ int main(void) {
             delay(PLAYERSPEED);
 
             lcd_cmd(1); //clear display
-        
         }
 
     }
